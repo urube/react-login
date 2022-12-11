@@ -1,23 +1,21 @@
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import { Login } from './component/loginform';
+import { Register } from './component/registerform';
 
 function App() {
+  const [currentForm, setCurrentForm] = useState('login')
+
+  const toggleForm = (formName) => { //set current form to name that has been given
+    setCurrentForm(formName);
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      { // Ternary statment to check if current form is login or not
+        currentForm === "login" ? <Login onFormSwitch={toggleForm} /> : <Register onFormSwitch={toggleForm} />
+      }
     </div>
   );
 }
